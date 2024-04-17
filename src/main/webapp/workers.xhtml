@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head/>
+<h:body>
+    <h2>People working in the #{branchWorkers.branch.name} branch:</h2>
+    <ol>
+        <ui:repeat value="#{branchWorkers.branch.workers}" var="worker">
+            <li><h:link outcome="workerDetails?workerId=#{worker.id}" >#{worker.name} #{worker.surname} #{worker.age}</h:link></li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <h:inputText a:placeholder="name" value="#{branchWorkers.workerToCreate.name}" required="true"/>
+        <h:inputText a:placeholder="surname" value="#{branchWorkers.workerToCreate.surname}" required="true"/>
+        <h:inputText a:placeholder="age" value="#{branchWorkers.workerToCreate.age}" required="true"/>
+        <h:commandButton value="Add worker to the branch" actionListener="#{branchWorkers.createWorker()}" action="#{'workers?faces-redirect=true&amp;branchId='.concat(branchWorkers.branch.id)}">
+            <f:param name="branchId" value="#{branchWorkers.branch.id}" />
+        </h:commandButton>
+    </h:form>
+    <h:link outcome="/branches" value="Back to branches page"/>
+</h:body>
+</html>
