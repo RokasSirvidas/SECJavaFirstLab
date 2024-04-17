@@ -9,11 +9,19 @@
 <h:head/>
 <h:body>
     <h2>People working in the #{branchWorkers.branch.name} branch:</h2>
-    <ol>
-        <ui:repeat value="#{branchWorkers.branch.workers}" var="worker">
-            <li><h:link outcome="workerDetails?workerId=#{worker.id}" >#{worker.name} #{worker.surname} #{worker.age}</h:link></li>
-        </ui:repeat>
-    </ol>
+    <h:form>
+        <ol>
+            <ui:repeat value="#{branchWorkers.branch.workers}" var="worker">
+                <li>
+                    <h:selectBooleanCheckbox value="#{worker.selected}" />
+                    <h:link outcome="workerDetails?workerId=#{worker.id}" >#{worker.name} #{worker.surname} #{worker.age}</h:link>
+                </li>
+            </ui:repeat>
+        </ol>
+        <h:commandButton value="Remove selected workers" actionListener="#{branchWorkers.removeSelectedWorkers()}" action="#{'workers?faces-redirect=true&amp;branchId='.concat(branchWorkers.branch.id)}" >
+            <f:param name="branchId" value="#{branchWorkers.branch.id}" />
+        </h:commandButton>
+    </h:form>
     <h:form>
         <h:inputText a:placeholder="name" value="#{branchWorkers.workerToCreate.name}" required="true"/>
         <h:inputText a:placeholder="surname" value="#{branchWorkers.workerToCreate.surname}" required="true"/>
@@ -22,6 +30,6 @@
             <f:param name="branchId" value="#{branchWorkers.branch.id}" />
         </h:commandButton>
     </h:form>
-    <h:link outcome="/branches" value="Back to branches page"/>
+    <h:link outcome="index" value="Back to branches page"/>
 </h:body>
 </html>

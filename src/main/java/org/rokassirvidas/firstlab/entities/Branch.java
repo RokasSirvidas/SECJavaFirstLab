@@ -12,7 +12,7 @@ import java.util.Objects;
 })
 public class Branch {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public void setId(Long id) {

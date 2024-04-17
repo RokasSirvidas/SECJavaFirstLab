@@ -53,4 +53,14 @@ public class BranchWorkers implements Serializable {
         workerToCreate.setBranch(this.branch);
         workersDAO.persist(workerToCreate);
     }
+
+
+    @Transactional
+    public void removeSelectedWorkers() {
+        for (Worker worker : branch.getWorkers()) {
+            if (worker.getSelected()) {
+                workersDAO.deleteWorkerById(worker.getId());
+            }
+        }
+    }
 }

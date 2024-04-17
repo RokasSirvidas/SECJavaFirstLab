@@ -11,8 +11,8 @@ import java.util.Objects;
     @NamedQuery(name = "Task.getAll", query = "SELECT t FROM Task as t"),
 })
 public class Task {
-    @GeneratedValue
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Long getId() {

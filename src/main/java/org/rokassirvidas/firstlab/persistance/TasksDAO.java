@@ -36,4 +36,15 @@ public class TasksDAO {
     public void flush() {
         em.flush();
     }
+
+    public void addWorkerById(Long taskId, Worker worker) {
+        Task task = getOne(taskId);
+        task.getWorkers().add(worker);
+        em.merge(task);
+    }
+    public void removeWorkerFromTaskById(Long id, Worker worker) {
+        Task task = getOne(id);
+        task.getWorkers().remove(worker);
+        em.merge(task);
+    }
 }

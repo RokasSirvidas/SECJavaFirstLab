@@ -12,7 +12,7 @@ import java.util.Objects;
 })
 public class Worker {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public void setId(Long id) {
@@ -99,5 +99,15 @@ public class Worker {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    private Boolean selected = false;
+
+    public Boolean getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Boolean selected) {
+        this.selected = selected;
     }
 }

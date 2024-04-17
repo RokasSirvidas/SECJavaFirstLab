@@ -9,21 +9,24 @@
 <h:head/>
 <h:body>
     <h2>#{updateWorkerDetails.worker.name} #{updateWorkerDetails.worker.surname}</h2>
+    <h3>Assigned Tasks:</h3>
     <ol>
         <ui:repeat value="#{updateWorkerDetails.worker.tasks}" var="task">
-            <li>#{task.name}</li>
+           <li><h:link outcome="taskDetails?taskId=#{task.id}">#{task.name}</h:link></li>
         </ui:repeat>
     </ol>
+    <h3>Change age:</h3>
     <h:form>
-        <h:outputText value="Change age: "/>
+
         <h:inputText a:placeholder="Enter the new age *" value="#{updateWorkerDetails.worker.age}" required="true" />
         <h:commandButton value="update" actionListener="#{updateWorkerDetails.updateWorker()}" action="#{'workerDetails?faces-redirect=true&amp;workerId='.concat(updateWorkerDetails.worker.id)}">
             <f:param name="workerId" value="#{updateWorkerDetails.worker.id}" />
         </h:commandButton>
     </h:form>
+    <h3>Create new task:</h3>
     <h:form>
-        <h:outputText value="Create new task: "/>
         <h:inputText a:placeholder="Enter Task name *" value="#{updateWorkerDetails.newTask.name}" required="true" />
+        <br/>
         <h:inputTextarea a:placeholder="Enter Task description" value="#{updateWorkerDetails.newTask.description}" required="false" />
         <h:commandButton value="update" actionListener="#{updateWorkerDetails.createTask()}" action="#{'workerDetails?faces-redirect=true&amp;workerId='.concat(updateWorkerDetails.worker.id)}">
             <f:param name="workerId" value="#{updateWorkerDetails.worker.id}" />

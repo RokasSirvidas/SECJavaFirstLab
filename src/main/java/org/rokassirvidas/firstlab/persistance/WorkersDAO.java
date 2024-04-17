@@ -5,6 +5,8 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import org.rokassirvidas.firstlab.entities.Worker;
 
+import java.util.List;
+
 @ApplicationScoped
 public class WorkersDAO {
     @Inject
@@ -18,7 +20,15 @@ public class WorkersDAO {
         return em.find(Worker.class, id);
     }
 
+    public List<Worker> getAll() {
+        return em.createQuery("SELECT w FROM Worker as w", Worker.class).getResultList();
+    }
     public Worker update(Worker worker) {
         return em.merge(worker);
+    }
+
+    public void deleteWorkerById(Long id) {
+        Worker worker = getOne(id);
+        em.remove(worker);
     }
 }
